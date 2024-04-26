@@ -14,7 +14,9 @@ class OrganizadorController extends Controller
      */
     public function index()
     {
-        //
+        // $organizadores = Organizador::all();
+        return view('organizadores.index');
+        // return view('organizadores.index', ['organizadores' => $organizadores]);
     }
 
     /**
@@ -24,7 +26,7 @@ class OrganizadorController extends Controller
      */
     public function create()
     {
-        //
+        return view('organizadores.create');
     }
 
     /**
@@ -35,7 +37,10 @@ class OrganizadorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $organizador = new Organizador();
+        $organizador->nombre = $request->input('nombre');
+        $organizador->save();
+        return to_route('organizadores.index');
     }
 
     /**
@@ -46,7 +51,8 @@ class OrganizadorController extends Controller
      */
     public function show(Organizador $organizador)
     {
-        //
+        $organizador = Organizador::find($id);
+        return view('organizadores.show', ['organizador' => $organizador]);
     }
 
     /**
@@ -57,7 +63,8 @@ class OrganizadorController extends Controller
      */
     public function edit(Organizador $organizador)
     {
-        //
+        $organizador = Organizador::find($id);
+        return view('organizadores.edit', ['organizador' => $organizador]);
     }
 
     /**
@@ -69,7 +76,9 @@ class OrganizadorController extends Controller
      */
     public function update(Request $request, Organizador $organizador)
     {
-        //
+        $organizador->nombre = $request->input('nombre');
+        $organizador->save();
+        return to_route('organizadores.index');
     }
 
     /**
@@ -80,6 +89,7 @@ class OrganizadorController extends Controller
      */
     public function destroy(Organizador $organizador)
     {
-        //
+        $organizador->delete();
+        return to_route('organizadores.index');
     }
 }

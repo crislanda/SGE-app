@@ -14,7 +14,9 @@ class ParticipacionController extends Controller
      */
     public function index()
     {
-        //
+        // $participaciones = Participacion::all();
+        return view('participaciones.index');
+        // return view('participaciones.index', ['participaciones' => $participaciones]);
     }
 
     /**
@@ -24,7 +26,7 @@ class ParticipacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('participaciones.create');
     }
 
     /**
@@ -35,7 +37,10 @@ class ParticipacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $participacion = new Participacion();
+        $participacion->nombre = $request->input('nombre');
+        $participacion->save();
+        return to_route('participaciones.index');
     }
 
     /**
@@ -46,7 +51,8 @@ class ParticipacionController extends Controller
      */
     public function show(Participacion $participacion)
     {
-        //
+        $participacion = Participacion::find($id);
+        return view('participaciones.show', ['participacion' => $participacion]);
     }
 
     /**
@@ -57,7 +63,8 @@ class ParticipacionController extends Controller
      */
     public function edit(Participacion $participacion)
     {
-        //
+        $participacion = Participacion::find($id);
+        return view('participaciones.edit', ['participacion' => $participacion]);
     }
 
     /**
@@ -69,7 +76,9 @@ class ParticipacionController extends Controller
      */
     public function update(Request $request, Participacion $participacion)
     {
-        //
+        $participacion->nombre = $request->input('nombre');
+        $participacion->save();
+        return to_route('participaciones.index');
     }
 
     /**
@@ -80,6 +89,7 @@ class ParticipacionController extends Controller
      */
     public function destroy(Participacion $participacion)
     {
-        //
+        $participacion->delete();
+        return to_route('participaciones.index');
     }
 }

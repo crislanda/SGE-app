@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Evento;
 use Illuminate\Http\Request;
+use App\Models\Organizador;
+use App\Http\Controllers\OrganizadorController;
 
 class EventoController extends Controller
 {
@@ -14,7 +16,8 @@ class EventoController extends Controller
      */
     public function index()
     {
-        //
+        $eventos = Evento::all();
+        return view('eventos.index', ['eventos' => $eventos]);
     }
 
     /**
@@ -24,7 +27,8 @@ class EventoController extends Controller
      */
     public function create()
     {
-        //
+        $organizadores = Organizador::all();
+        return view('eventos.create', ['organizadores' => $organizadores]);
     }
 
     /**
@@ -35,7 +39,12 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $evento = new Evento();
+        $evento->nombre = $request->input('nombre');
+        $evento->fecha = $request->input('fecha');
+        $evento->organizador_id = $request->input('organizador_id');
+        $evento->save();
+        return to_route('eventos.index');
     }
 
     /**
@@ -46,7 +55,8 @@ class EventoController extends Controller
      */
     public function show(Evento $evento)
     {
-        //
+        $evento = Evento::find($id);
+        return view('eventos.show', ['evento' => $evento]);
     }
 
     /**
@@ -57,7 +67,8 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
-        //
+        $organizadores = Organizador::all();
+        return view('eventos.edit', ['evento' => $evento, 'organizadores' => $organizadores]);
     }
 
     /**
@@ -69,7 +80,11 @@ class EventoController extends Controller
      */
     public function update(Request $request, Evento $evento)
     {
-        //
+        $evento->nombre = $request->input('nombre');
+        $evento->fecha = $request->input('fecha');
+        $evento->organizador_id = $request->input('organizador_id');
+        $evento->save();
+        return to_route('eventos.index');
     }
 
     /**
@@ -80,6 +95,8 @@ class EventoController extends Controller
      */
     public function destroy(Evento $evento)
     {
-        //
+        $evento->delete();
+        return to_route('eventos.index');
     }
 }
+

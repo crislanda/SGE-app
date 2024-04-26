@@ -17,13 +17,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($participaciones as $participacion)
+            {{-- @foreach ($participaciones as $participacion)
                 <tr>
                     <td>{{ $participacion->evento->nombre }}</td>
                     <td>{{ $participacion->organizador->nombre }} {{ $participacion->organizador->apellido }}</td>
                     <td>{{ $participacion->rol }}</td>
                 </tr>
-            @endforeach
+            @endforeach --}}
         </tbody>
     </table>
 </body>

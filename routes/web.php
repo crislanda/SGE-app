@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 //eventos
+use App\Http\Controllers\EventoController;
 Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
 Route::get('/eventos/edit', [EventoController::class, 'edit'])->name('eventos.edit');
 Route::get('/eventos/show', [EventoController::class, 'show'])->name('eventos.show');
@@ -39,7 +40,7 @@ Route::delete('/eventos/destroy', [EventoController::class, 'destroy'])->name('e
 
 
 //organizadores
-
+use App\Http\Controllers\OrganizadorController;
 Route::get('/organizadores/create', [OrganizadorController::class, 'create'])->name('organizadores.create');
 Route::post('/organizadores', [OrganizadorController::class, 'store'])->name('organizadores.store');
 
@@ -54,6 +55,7 @@ Route::get('/organizadores/index', [OrganizadorController::class, 'index'])->nam
 
 
 //participaciones
+use App\Http\Controllers\ParticipacionController;
 Route::get('/participaciones/create', [ParticipacionController::class, 'create'])->name('participaciones.create');
 Route::post('/participaciones', [ParticipacionController::class, 'store'])->name('participaciones.store');
 
