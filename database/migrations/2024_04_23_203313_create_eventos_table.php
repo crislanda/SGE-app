@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
-            $table->text('descripción');
+            $table->text('descripcion');
             $table->dateTime('fecha_inicio');
             $table->dateTime('fecha_fin');
-            $table->string('ubicación');
+            $table->string('ubicacion');
         });
     }
 

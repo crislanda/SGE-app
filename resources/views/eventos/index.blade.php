@@ -1,3 +1,15 @@
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -14,6 +26,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">ID Evento</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Descripción</th>
                                 <th scope="col">Fecha de inicio</th>
@@ -26,6 +39,7 @@
                             @forelse($eventos as $evento)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $evento->id }}</td>
                                     <td>{{ $evento->nombre }}</td>
                                     <td>{{ $evento->descripcion }}</td>
                                     <td>{{ $evento->fecha_inicio }}</td>

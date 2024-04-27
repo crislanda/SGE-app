@@ -14,9 +14,8 @@ class OrganizadorController extends Controller
      */
     public function index()
     {
-        // $organizadores = Organizador::all();
-        return view('organizadores.index');
-        // return view('organizadores.index', ['organizadores' => $organizadores]);
+        $organizadores = Organizador::all();
+        return view('organizadores.index', ['organizadores' => $organizadores]);
     }
 
     /**
@@ -39,6 +38,9 @@ class OrganizadorController extends Controller
     {
         $organizador = new Organizador();
         $organizador->nombre = $request->input('nombre');
+        $organizador->apellido = $request->input('apellido');
+        $organizador->email = $request->input('email');
+        $organizador->telefono = $request->input('telefono');
         $organizador->save();
         return to_route('organizadores.index');
     }
@@ -63,7 +65,7 @@ class OrganizadorController extends Controller
      */
     public function edit(Organizador $organizador)
     {
-        $organizador = Organizador::find($id);
+        // $organizador = Organizador::find($id);
         return view('organizadores.edit', ['organizador' => $organizador]);
     }
 
@@ -77,9 +79,13 @@ class OrganizadorController extends Controller
     public function update(Request $request, Organizador $organizador)
     {
         $organizador->nombre = $request->input('nombre');
+        $organizador->apellido = $request->input('apellido');
+        $organizador->email = $request->input('email');
+        $organizador->telefono = $request->input('telefono');
         $organizador->save();
-        return to_route('organizadores.index');
+        return redirect()->route('organizadores.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -89,7 +95,12 @@ class OrganizadorController extends Controller
      */
     public function destroy(Organizador $organizador)
     {
-        $organizador->delete();
-        return to_route('organizadores.index');
+        try {
+            $organizador->delete();
+            return redirect()->route('organizadores.index')->with('success', 'Organizador eliminado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->route('organizadores.index')->with('error', 'No se puede eliminar el organizador, está relacionado con eventos. Elimine primero las participaciones de ese organizador.');
+        }
+        return redirect()->route('organizadores.index');
     }
 }

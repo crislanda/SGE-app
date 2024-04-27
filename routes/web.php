@@ -33,36 +33,27 @@ require __DIR__.'/auth.php';
 //eventos
 use App\Http\Controllers\EventoController;
 Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
-Route::get('/eventos/edit', [EventoController::class, 'edit'])->name('eventos.edit');
-Route::get('/eventos/show', [EventoController::class, 'show'])->name('eventos.show');
+Route::delete('/eventos/{evento}/destroy', [EventoController::class, 'destroy'])->name('eventos.destroy');
+Route::get('/eventos/{evento}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
 Route::get('/eventos/index', [EventoController::class, 'index'])->name('eventos.index');
-Route::delete('/eventos/destroy', [EventoController::class, 'destroy'])->name('eventos.destroy');
-
+Route::post('/eventos/store', [EventoController::class, 'store'])->name('eventos.store');
+Route::put('/eventos/{evento}/update', [EventoController::class, 'update'])->name('eventos.update');
 
 //organizadores
 use App\Http\Controllers\OrganizadorController;
 Route::get('/organizadores/create', [OrganizadorController::class, 'create'])->name('organizadores.create');
-Route::post('/organizadores', [OrganizadorController::class, 'store'])->name('organizadores.store');
-
-Route::get('/organizadores/edit', [OrganizadorController::class, 'edit'])->name('organizadores.edit');
-Route::put('/organizadores/{organizador}', [OrganizadorController::class, 'update'])->name('organizadores.update');
-
-Route::get('/organizadores/show', [OrganizadorController::class, 'show'])->name('organizadores.show');
-
-Route::delete('/organizadores/destroy', [OrganizadorController::class, 'destroy'])->name('organizadores.destroy');
-
+Route::delete('/organizadores/{organizador}/destroy', [OrganizadorController::class, 'destroy'])->name('organizadores.destroy');
+Route::get('/organizadores/{organizador}/edit', [OrganizadorController::class, 'edit'])->name('organizadores.edit');
 Route::get('/organizadores/index', [OrganizadorController::class, 'index'])->name('organizadores.index');
-
+Route::post('/organizadores/store', [OrganizadorController::class, 'store'])->name('organizadores.store');
+Route::put('/organizadores/{organizador}/update', [OrganizadorController::class, 'update'])->name('organizadores.update');
 
 //participaciones
 use App\Http\Controllers\ParticipacionController;
 Route::get('/participaciones/create', [ParticipacionController::class, 'create'])->name('participaciones.create');
-Route::post('/participaciones', [ParticipacionController::class, 'store'])->name('participaciones.store');
-
-Route::get('/participaciones/edit', [ParticipacionController::class, 'edit'])->name('participaciones.edit');
-Route::put('/participaciones/{participacion}', [ParticipacionController::class, 'update'])->name('participaciones.update');
-
-Route::get('/participaciones/show', [ParticipacionController::class, 'show'])->name('participaciones.show');
-
+Route::delete('/participaciones/{participacion}/destroy', [ParticipacionController::class, 'destroy'])->name('participaciones.destroy');
+Route::get('/participaciones/{participacion}/edit', [ParticipacionController::class, 'edit'])->name('participaciones.edit');
 Route::get('/participaciones/index', [ParticipacionController::class, 'index'])->name('participaciones.index');
+Route::post('/participaciones/store', [ParticipacionController::class, 'store'])->name('participaciones.store');
+Route::put('/participaciones/{participacion}/update', [ParticipacionController::class, 'update'])->name('participaciones.update');
 

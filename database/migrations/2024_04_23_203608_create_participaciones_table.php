@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('evento_id');
             $table->unsignedBigInteger('organizador_id');
             $table->string('rol');
+            $table->foreign('evento_id')->references('id')->on('eventos');
+            $table->foreign('organizador_id')->references('id')->on('organizadores');
         });
     }
 
@@ -31,3 +33,4 @@ return new class extends Migration
         Schema::dropIfExists('participaciones');
     }
 };
+

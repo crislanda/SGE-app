@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Participacion;
+use App\Models\Evento;
+use App\Models\Organizador;
 use Illuminate\Http\Request;
 
 class ParticipacionController extends Controller
@@ -14,9 +16,8 @@ class ParticipacionController extends Controller
      */
     public function index()
     {
-        // $participaciones = Participacion::all();
-        return view('participaciones.index');
-        // return view('participaciones.index', ['participaciones' => $participaciones]);
+        $participaciones = Participacion::all();
+        return view('participaciones.index', ['participaciones' => $participaciones]);
     }
 
     /**
@@ -26,7 +27,9 @@ class ParticipacionController extends Controller
      */
     public function create()
     {
-        return view('participaciones.create');
+        $eventos = Evento::all();
+        $organizadores = Organizador::all();
+        return view('participaciones.create', ['eventos' => $eventos, 'organizadores' => $organizadores]);
     }
 
     /**
@@ -38,9 +41,11 @@ class ParticipacionController extends Controller
     public function store(Request $request)
     {
         $participacion = new Participacion();
-        $participacion->nombre = $request->input('nombre');
+        $participacion->evento_id = $request->input('evento_id');
+        $participacion->organizador_id = $request->input('organizador_id');
+        $participacion->rol = $request->input('rol');
         $participacion->save();
-        return to_route('participaciones.index');
+        return redirect()->route('participaciones.index');
     }
 
     /**
@@ -51,8 +56,6 @@ class ParticipacionController extends Controller
      */
     public function show(Participacion $participacion)
     {
-        $participacion = Participacion::find($id);
-        return view('participaciones.show', ['participacion' => $participacion]);
     }
 
     /**
@@ -63,8 +66,9 @@ class ParticipacionController extends Controller
      */
     public function edit(Participacion $participacion)
     {
-        $participacion = Participacion::find($id);
-        return view('participaciones.edit', ['participacion' => $participacion]);
+        $eventos = Evento::all();
+        $organizadores = Organizador::all();
+        return view('participaciones.edit', ['participacion' => $participacion, 'eventos' => $eventos, 'organizadores' => $organizadores]);
     }
 
     /**
@@ -76,9 +80,11 @@ class ParticipacionController extends Controller
      */
     public function update(Request $request, Participacion $participacion)
     {
-        $participacion->nombre = $request->input('nombre');
+        $participacion->evento_id = $request->input('evento_id');
+        $participacion->organizador_id = $request->input('organizador_id');
+        $participacion->rol = $request->input('rol');
         $participacion->save();
-        return to_route('participaciones.index');
+        return redirect()->route('participaciones.index');
     }
 
     /**
@@ -89,7 +95,12 @@ class ParticipacionController extends Controller
      */
     public function destroy(Participacion $participacion)
     {
-        $participacion->delete();
-        return to_route('participaciones.index');
+        try {
+            $participacion->delete();
+            return redirect()->route('participaciones.index')->with('success', 'Participación eliminada exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->route('participaciones.index')->with('error', 'No se puede eliminar la participacion, consulte con el desarrollador para ayuda.');
+        }
+        return redirect()->route('participaciones.index');
     }
 }

@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organizador extends Model
 {
+    protected $table = 'organizadores';
+    public $timestamps = false;
+
     protected $fillable = [
         'nombre',
         'apellido',
         'email',
-        'teléfono',
+        'telefono',
     ];
-    public function eventos()
-    {
-        return $this->hasManyThrough('App\Models\Evento', 'App\Models\Participacion', 'organizador_id', 'id', 'id', 'evento_id');
-    }
     use HasFactory;
 }

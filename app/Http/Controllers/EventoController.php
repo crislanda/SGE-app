@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 use App\Models\Organizador;
-use App\Http\Controllers\OrganizadorController;
 
 class EventoController extends Controller
 {
@@ -27,8 +26,7 @@ class EventoController extends Controller
      */
     public function create()
     {
-        $organizadores = Organizador::all();
-        return view('eventos.create', ['organizadores' => $organizadores]);
+        return view('eventos.create');
     }
 
     /**
@@ -41,10 +39,12 @@ class EventoController extends Controller
     {
         $evento = new Evento();
         $evento->nombre = $request->input('nombre');
-        $evento->fecha = $request->input('fecha');
-        $evento->organizador_id = $request->input('organizador_id');
+        $evento->descripcion = $request->input('descripcion');
+        $evento->fecha_inicio = $request->input('fecha_inicio');
+        $evento->fecha_fin = $request->input('fecha_fin');
+        $evento->ubicacion = $request->input('ubicacion');
         $evento->save();
-        return to_route('eventos.index');
+        return redirect()->route('eventos.index');
     }
 
     /**
@@ -55,8 +55,6 @@ class EventoController extends Controller
      */
     public function show(Evento $evento)
     {
-        $evento = Evento::find($id);
-        return view('eventos.show', ['evento' => $evento]);
     }
 
     /**
@@ -67,8 +65,7 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
-        $organizadores = Organizador::all();
-        return view('eventos.edit', ['evento' => $evento, 'organizadores' => $organizadores]);
+        return view('eventos.edit', ['evento' => $evento]);
     }
 
     /**
@@ -81,10 +78,12 @@ class EventoController extends Controller
     public function update(Request $request, Evento $evento)
     {
         $evento->nombre = $request->input('nombre');
-        $evento->fecha = $request->input('fecha');
-        $evento->organizador_id = $request->input('organizador_id');
+        $evento->descripcion = $request->input('descripcion');
+        $evento->fecha_inicio = $request->input('fecha_inicio');
+        $evento->fecha_fin = $request->input('fecha_fin');
+        $evento->ubicacion = $request->input('ubicacion');
         $evento->save();
-        return to_route('eventos.index');
+        return redirect()->route('eventos.index');
     }
 
     /**
@@ -95,8 +94,13 @@ class EventoController extends Controller
      */
     public function destroy(Evento $evento)
     {
-        $evento->delete();
-        return to_route('eventos.index');
+        try {
+            $evento->delete();
+            return redirect()->route('eventos.index')->with('success', 'Evento eliminado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->route('eventos.index')->with('error', 'No se puede eliminar el evento, está relacionado con participaciones. Elimine primero las participaciones de ese evento.');
+        }
+        // $eventos->delete();
+        return redirect()->route('eventos.index');
     }
 }
-
