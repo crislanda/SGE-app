@@ -124,6 +124,6 @@ Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
 - Desarrollador 1: Nombre Apellido (correo@ejemplo.com)
 - Desarrollador 2: Nombre Apellido (correo@ejemplo.com)
 
-¡Gracias por contribuir!
+¡Gracias por contribuir! (-aleksanderFerrero)
 
 ---
