@@ -1,11 +1,11 @@
-# SGE-app
+SGE-app
 
-## Descripción
-SGE-app es una aplicación desarrollada en Laravel que permite la gestión integral de eventos, incluyendo el manejo de organizadores y sus roles en los eventos, mediante operaciones CRUD completas.
+ Descripción
+Sistema de gestion de evevntos ó SGE-app es una aplicación desarrollada en Laravel que permite la gestión integral de eventos, incluyendo el manejo de organizadores y sus roles en los eventos, mediante operaciones CRUD completas.
 
-## Estructura de las Tablas
+Estructura de las Tablas
 
-### 1. Eventos (Entidad Fuerte)
+ 1. Eventos (Entidad Fuerte)
 - id (PK)
 - nombre
 - descripción
@@ -13,57 +13,57 @@ SGE-app es una aplicación desarrollada en Laravel que permite la gestión integ
 - fecha_fin
 - ubicación
 
-### 2. Organizadores (Entidad Fuerte)
+ 2. Organizadores (Entidad Fuerte)
 - id (PK)
 - nombre
 - apellido
 - email
 - teléfono
 
-### 3. Participaciones (Entidad Débil - Relaciona Eventos y Organizadores)
+ 3. Participaciones (Entidad Débil - Relaciona Eventos y Organizadores)
 - id (PK)
 - evento_id (FK)
 - organizador_id (FK)
 - rol (ej. ponente, patrocinador, asistente)
 
-## Requisitos del Proyecto
+ Requisitos del Proyecto
 
-### 1. Base de Datos
+ 1. Base de Datos
 - Diseñar y crear las tablas utilizando migraciones de Laravel.
 
-### 2. Modelos
+ 2. Modelos
 - Establecer modelos para cada entidad con las relaciones necesarias:
   - Eventos tienen muchos Organizadores a través de Participaciones.
   - Organizadores pueden participar en muchos Eventos.
 
-### 3. Controladores
+ 3. Controladores
 - Desarrollar controladores para manejar la lógica de negocio asociada a cada CRUD.
 
-### 4. Vistas
+ 4. Vistas
 - Crear vistas usando Blade para permitir interacciones CRUD (listados, creaciones, ediciones y detalles).
 
-### 5. Rutas
+ 5. Rutas
 - Configurar rutas web adecuadas para las operaciones CRUD.
 - Asegurar las rutas con el middleware auth de Laravel Breeze.
 
-### 6. Autenticación
+ 6. Autenticación
 - Implementar Laravel Breeze para gestionar autenticación y registro de usuarios.
 
-### 7. Versionamiento con Git
+ 7. Versionamiento con Git
 - Inicializar un repositorio Git.
 - Trabajar con una rama main y ramas individuales para cada desarrollador.
 
-### 8. Repositorio Remoto
+ 8. Repositorio Remoto
 - Sincronizar el repositorio local con un repositorio en GitHub, estableciendo permisos adecuados para el equipo de desarrollo.
 
-## Configuración y Ejecución
+ Configuración y Ejecución
 
-### Requisitos Previos
+ Requisitos Previos
 - PHP instalado en el sistema.
 - Composer instalado en el sistema.
 - Servidor de base de datos MySQL.
 
-### Pasos
+ Pasos
 1. Clonar el repositorio desde GitHub:
    ```bash
    git clone https://github.com/tu-usuario/sge-app.git
@@ -111,7 +111,7 @@ SGE-app es una aplicación desarrollada en Laravel que permite la gestión integ
 
 ¡Listo! Ahora puedes comenzar a gestionar tus eventos y organizadores con SGE-app.
 
-## Contribución
+Contribución
 Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
 
 1. Haz un fork del repositorio.
@@ -120,10 +120,10 @@ Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
 4. Sube tus cambios a tu repositorio en GitHub: `git push origin feature/nueva-funcionalidad`.
 5. Haz un pull request a la rama `main` del repositorio original.
 
-## Equipo
-- Desarrollador 1: Nombre Apellido (correo@ejemplo.com)
-- Desarrollador 2: Nombre Apellido (correo@ejemplo.com)
+ Equipo
+- Desarrollador 1: Nombre Apellido (cristianlandazuri07@.com)
 
-¡Gracias por contribuir! (-aleksanderFerrero)
+
+¡Gracias por contribuir! (-Cristian Landazuri)
 
 ---
